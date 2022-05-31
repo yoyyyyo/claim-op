@@ -53,7 +53,7 @@
           ethereum.selectedAddress,
           data.amount, data.proof
         ).catch((e) => {
-          alert('error occurred while sending tx: ' + (data.message || data));
+          alert('error occurred while sending tx: ' + (e?.data?.message || e));
           console.error(e);
         })
         
