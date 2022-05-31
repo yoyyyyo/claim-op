@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+  <head></head>
+  <body>
+    <p>the code for this page is pretty self explanatory and i encourage you to hit ctrl+u and read it.</p>
+    step 1: <button class="connect">connect wallet</button>
+    <p>
+      step 2: go to https://gateway-backend-mainnet.optimism.io/proof/<your address here> and copy in all the details here
+    </p>
+    
+    <div>
+      step 3: paste data from page linked above here - <textarea></textarea>
+    </div>
+    
+    <div> step 4: ensure you are on the optimism chain in metamask/whatever wallet before you hit send tx</div>
+    <div> step 5: <button class="send">send tx</button></div>
+    <script src="https://cdn.ethers.io/lib/ethers-5.6.umd.min.js" type="text/javascript"></script>
+    <script>
+      document.querySelector('.connect').onclick = () => ethereum ? ethereum.request({ method: 'eth_requestAccounts' }) : alert('no wallet injected');
+      document.querySelector('.send').onclick = () => {
+        let data;
+        try {
+          const blob = document.querySelector('textarea').value;
+          data = JSON.parse(blob);
+        } catch(e) {
+          alert('error occurred while parsing data blob');
+          console.log(e);
+        }
+        
+        
+        if (!data.index || !data.amount || !data.proof)
+           return alert('data is missing index or amount or proof')
+       
+         if (!ethereum.selectedAddress)
+           return alert('no ethereum wallet linked');
+        
+        try {
+          new ethers.Contract(
+             '0xfedfaf1a10335448b7fa0268f56d2b44dbd357de', 
+             ['function claim(uint,address,uint,bytes32[])'],
+             new ethers.providers.Web3Provider(window.ethereum).getSigner()
+          ).claim(
+            data.index,
+            ethereum.selectedAddress,
+            data.amount, data.proof
+          )
+        } catch(e) {
+          alert('error occurred while sending tx: ' + (data.message || data));
+          console.error(e);
+        }
+        
+      }
+    
+    </script>
+  </body>
+</html>
