@@ -5,6 +5,7 @@
     <p>the code for this page is pretty self explanatory and i encourage you to hit ctrl+u and read it.</p>
     <p>this page is not endorsed or ran by optimism, this page is not financial advice</p>
     step 1: <button class="connect">connect wallet</button>
+    <p class="selectedWallet" style="display: none">currently connected wallet: <span class="address"></span></p>
     <p>
       step 2: go to https://gateway-backend-mainnet.optimism.io/proof/&lt;your address goes here&gt; and copy in all the details here
     </p>
@@ -17,7 +18,12 @@
     <div> step 5: <button class="send">send tx</button></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.8/ethers.umd.min.js" integrity="sha512-rQkwNC0M1xDe/Q5+60yxVaivh7dpaoZthM91gAkEq4/5aLmMVNkk/Ru9Fjf3bCVA1jbJXa5sZsLPBDKHy+0LaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-      document.querySelector('.connect').onclick = () => ethereum ? ethereum.request({ method: 'eth_requestAccounts' }) : alert('no wallet injected');
+      document.querySelector('.connect').onclick = () => ethereum ?
+        ethereum.request({ method: 'eth_requestAccounts' }).then(() => {
+            document.querySelector('.address').textContent = ethereum.selectedAddress;
+            document.querySelector('.selectedWallet').style.display = 'block';
+        })
+        : alert('no wallet injected');
       document.querySelector('.send').onclick = () => {
         let data;
         try {
