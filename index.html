@@ -41,6 +41,9 @@
          if (!ethereum.selectedAddress)
            return alert('no ethereum wallet linked');
         
+        if (ethereum.chainId != '0xa' && ethereum.chainId != 10)
+            alert('you might have the wrong chain selected (optimism is 0xa / 10):' + ethereum.chainId);
+        
         try {
           new ethers.Contract(
              '0xfedfaf1a10335448b7fa0268f56d2b44dbd357de', 
