@@ -15,8 +15,7 @@
     
     <div> step 4: ensure you are on the optimism chain in metamask/whatever wallet before you hit send tx</div>
     <div> step 5: <button class="send">send tx</button></div>
-    <script src="https://cdn.ethers.io/lib/ethers-5.6.umd.min.js" type="text/javascript"
-            integrity="sha256-AUBwigRyBlJ8/3NDM5lNmYmpMvBXx4mIHdqcT4ARZwI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.8/ethers.umd.min.js" integrity="sha512-rQkwNC0M1xDe/Q5+60yxVaivh7dpaoZthM91gAkEq4/5aLmMVNkk/Ru9Fjf3bCVA1jbJXa5sZsLPBDKHy+0LaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
       document.querySelector('.connect').onclick = () => ethereum ? ethereum.request({ method: 'eth_requestAccounts' }) : alert('no wallet injected');
       document.querySelector('.send').onclick = () => {
