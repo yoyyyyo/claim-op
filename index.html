@@ -18,7 +18,7 @@
     <div> step 5: <button class="send">send tx</button></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.6.8/ethers.umd.min.js" integrity="sha512-rQkwNC0M1xDe/Q5+60yxVaivh7dpaoZthM91gAkEq4/5aLmMVNkk/Ru9Fjf3bCVA1jbJXa5sZsLPBDKHy+0LaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-      document.querySelector('.connect').onclick = () => ethereum ?
+      document.querySelector('.connect').onclick = () => window.ethereum ?
         ethereum.request({ method: 'eth_requestAccounts' }).then(() => {
             document.querySelector('.address').textContent = ethereum.selectedAddress;
             document.querySelector('.selectedWallet').style.display = 'block';
